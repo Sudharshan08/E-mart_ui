@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_app/consts/consts.dart';
 import 'package:emart_app/consts/lists.dart';
 import 'package:emart_app/controllers/auth_controller.dart';
+import 'package:emart_app/controllers/profile_controller.dart';
+import 'package:emart_app/services/firestore_services.dart';
 import 'package:emart_app/views/auth_screen/login_screen.dart';
 import 'package:emart_app/views/home_screen/home_screen.dart';
 import 'package:emart_app/views/profile_screen/components/details_card.dart';
@@ -14,8 +17,27 @@ class ProfileScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    var controller = Get.put(ProfileController());
+
     return bgWidget(Scaffold(
-      body: Column(
+      body:StreamBuilder(
+        stream: FirestoreServices.getUser(currentUser!.uid),
+        
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+
+          if(!snapshot.hasData){
+            return const Center(
+              child:CircularProgressIndicator(
+                valueColor: AlwaysStoppedAnimation(redColor),
+            ),
+            );
+          }
+          else{
+
+            var data = snapshot.data!.docs[0];
+
+            return  Column(
         children: [
 
 //edit profile button
@@ -25,8 +47,12 @@ class ProfileScreen extends StatelessWidget {
         alignment: Alignment.topRight,
         child: Icon(Icons.edit, color: whiteColor,),
         ).onTap((){
-          Get.to(()=>const EditProfileScreen());
-        })
+
+          controller.nameController.text = data['name'];
+          controller.passController.text = data['password'];
+          
+          Get.to(()=> EditProfileScreen(data: data,));
+        }),
     ),
 
 
@@ -34,14 +60,19 @@ class ProfileScreen extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal:8.0),
             child: Row(
-              children: [Image.asset(imgProfile2, width: 100, fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make(),
+              children: [
+                data['imageUrl'] == '' ?
+                
+                Image.asset(imgProfile2, width: 100, fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make()
+                :
+                Image.network(data['imageUrl'], width: 100, fit: BoxFit.cover,).box.roundedFull.clip(Clip.antiAlias).make(),
               10.widthBox,
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    "Dummy user".text.fontFamily(semibold).white.make(),
-                    "Customer@example.come".text.white.make(),
+                    "${data['name']}".text.fontFamily(semibold).white.make(),
+                    "${data['email']}".text.white.make(),
               ]),
               ),
               OutlinedButton(
@@ -62,8 +93,9 @@ class ProfileScreen extends StatelessWidget {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            detailsCard(count: "00", title: "In your cart", width: context.screenWidth / 3.6),
-            detailsCard(count: "17", title: "In your Wishlist", width: context.screenWidth / 3.6),
+            detailsCard(count: "${data['cart_count']}", title: "In your cart", width: context.screenWidth / 3.6),
+            detailsCard(count: "${data['wishlist_count']}", title: "In your Wishlist", width: context.screenWidth / 3.6),
+            detailsCard(count: "${data['order_count']}", title: "Your Order", width: context.screenWidth / 3.6),
           ],
         ),
 
@@ -86,6 +118,11 @@ class ProfileScreen extends StatelessWidget {
 
 
         ],
+      );
+          }
+
+          
+        },
       ),
     ));
   }
