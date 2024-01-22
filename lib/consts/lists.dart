@@ -5,7 +5,7 @@ const secondSliderList = [imgSs1, imgSs2, imgSs3, imgSs4];
 
 const categoriesList = [
   //change inner names in string section
-  womenClothing, menClothing,kidtoys,furniture,automobile, automobile,automobile,automobile,automobile
+  womenClothing, menClothing,kidtoys,compAccess,automobile, cellphone,jewelery,sports,furniture
 ];
 
 const categoryImages = [

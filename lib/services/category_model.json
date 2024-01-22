@@ -1,0 +1,80 @@
+{
+    "categories":[
+        {
+            "name":"Greens",
+            "subcategory":[
+                "Cabbage",
+                "Spinach",
+                "Coriander leaves",
+                "Mint"
+            ]
+        },
+        {
+            "name":"Root",
+            "subcategory":[
+                "Potatoes",
+                "Carrots",
+                "Onions",
+                "Sweet potatoes"
+            ]
+        },
+        {
+            "name":"Allium",
+            "subcategory":[
+                "garlic",
+                "onion",
+                 "leeks"
+            ]
+        },
+        {
+            "name":"Dairy",
+            "subcategory":[
+                "butter",
+                "egg",
+                "milk"
+            ]
+        },
+       {
+        "name":"plant based",
+        "subcategory":[
+            "broccoli",
+            "lentils",
+            "avocado",
+            "green pras"
+        ]
+       },
+       {
+        "name":"edible plant stem",
+        "subcategory":[
+            "potato",
+            "raddish",
+            "drumstick"
+        ]
+       },
+       {
+        "name":"sea food",
+        "subcategory":[
+            "fish",
+            "tuna",
+            "cod"
+        ]
+       },
+       {
+        "name":"eggs",
+        "subcategory":[
+            "chicken egg",
+            "duck egg",
+            "quail egg"
+        ]
+       },
+       {
+        "name":"shellfish",
+        "subcategory":[
+            "prawns",
+            "clams",
+            "sqid"
+        ]
+       }
+    ]
+
+}

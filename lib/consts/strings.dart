@@ -35,17 +35,17 @@ const featuredCategories = "Featured Categories";
 
 const womenClothing = "Greens",
  menClothing = "Roots",
- compAccess = "marrow",
+ compAccess = "dairy",
  automobile = "edible plant stem",
  kidtoys = "allium",
- sports = "cruciferous",
- jewelery = "nightshades",
- cellphone = "hanging vegies",
+ sports = "seafood",
+ jewelery = "eggs",
+ cellphone = "shellfish",
  furniture = "plant based";
 
  //profile strings
 
- const orders = "My Orders", message = "Messages";
+ const orders = "My Orders", message = "Messages", oldpass="Old password", newpass="New password";
 
  const termAndCond = "Terms and Conditions";
  const privacyPolicy = "Privacy Policy";
