@@ -1,4 +1,4 @@
-import 'dart:js';
+//import 'dart:js';
 
 import 'package:emart_app/consts/consts.dart';
 import 'package:emart_app/models/category_model.dart';
@@ -56,5 +56,11 @@ class ProductController extends GetxController {
     }).catchError((error){
       VxToast.show(context, msg: error.toString());
     });
+  }
+
+  //this is for , when we go back after increasing values and quantity , it needs to be reset after user click on back button
+  resetValues(){
+    totalPrice.value = 0;
+    quantity.value = 0;
   }
 }
