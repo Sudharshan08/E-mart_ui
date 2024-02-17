@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:emart_app/consts/colors.dart';
 import 'package:emart_app/consts/consts.dart';
 import 'package:emart_app/controllers/product_controller.dart';
+import 'package:emart_app/views/chat_screen/chat_screen.dart';
 import 'package:emart_app/widgets_common/our_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -30,6 +31,7 @@ class ItemDetails extends StatelessWidget {
             }, 
             icon: Icon(Icons.arrow_back),),
           title: title!.text.color(darkFontGrey).fontFamily(bold).make(),
+          //if want to add itms to wishlist the code here vedio no15
         ),
         body: Column(
           children: [
@@ -70,10 +72,18 @@ class ItemDetails extends StatelessWidget {
                             "${data['p_seller']}".text.fontFamily(semibold).color(darkFontGrey).size(17).make(),
                           ],
                         )),
+
+                        //for messaging in item details section
+
                           const CircleAvatar(
                           backgroundColor: whiteColor,
                           child:Icon(Icons.message_rounded,color: darkFontGrey,),
-                        ),
+                        ).onTap(() {
+                          Get.to(()=>ChatScreen(),
+                          arguments: [data['p_seller'],data['vendor_id']],
+                          
+                          );
+                        }),
                       ],
                     ).box.height(70).padding(const EdgeInsets.symmetric(horizontal: 16),).color(textfieldGrey).make(),
     
@@ -135,14 +145,19 @@ class ItemDetails extends StatelessWidget {
               height: 70,
               child: ourButton(color: redColor, 
               onPress: (){
-                controller.addToCart(
+                if(controller.quantity.value > 0){
+                  controller.addToCart(
                   context: context,
+                  vendorID: data['vendor_id'],
                   img: data['p_imgs'][0],
                   qty: controller.quantity.value,
                   sellername: data['p_seller'],
                   title: data['p_name'],
                   tprice: controller.totalPrice.value );
                   VxToast.show(context, msg: "Added to cart");
+                }else{
+                  VxToast.show(context, msg: "Quantity not selected");
+                }
               }, 
               textColor: whiteColor, title: "Add to cart"),
             )

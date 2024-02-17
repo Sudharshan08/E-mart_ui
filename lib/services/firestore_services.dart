@@ -22,4 +22,35 @@ class FirestoreServices {
     return firestore.collection(cartCollection).doc(docId).delete();
   }
 
+  //get all chat messages
+
+  static getChatMessages(docId){
+    return firestore.collection(
+      chatsCollection)
+      .doc(docId)
+      .collection(messagesCollection)
+      .orderBy('created_on', descending: false)
+      .snapshots();
+  }
+
+  static getAllOrders(){
+    return firestore.collection(ordersCollection).where('order_by',isEqualTo: currentUser!.uid).snapshots();
+  }
+  //if want to add wishlist and messages section from account platform see vedio 17 and timing is 19:30 
+
+
+  static getCounts()async {
+    var res = await Future.wait([
+      firestore.collection(cartCollection).where('added_by', isEqualTo: currentUser!.uid).get().then((value){
+        return value.docs.length;
+      }),
+       firestore.collection(productsCollection).where('p_wishlist', isEqualTo: currentUser!.uid).get().then((value){
+        return value.docs.length;
+      }),
+       firestore.collection(ordersCollection).where('order_by', isEqualTo: currentUser!.uid).get().then((value){
+        return value.docs.length;
+      }),
+    ]);
+    return res;
+  }
 }

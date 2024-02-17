@@ -1,5 +1,6 @@
 import 'package:emart_app/consts/consts.dart';
 
+
 const slidersList = [newSlider1, newSlider2, newSlider3, newSlider4];
 const secondSliderList = [imgSs1, imgSs2, imgSs3, imgSs4];
 
@@ -9,8 +10,11 @@ const categoriesList = [
 ];
 
 const categoryImages = [
-  imgveg1, imgveg1, imgveg1, imgveg1, imgveg1, imgveg1, imgveg1, imgveg1, imgveg1
+  greens, roots, allium, dairy, edible , shelfish, eggs, seafood, plantbased,
 ];
 
 const profileButtonsList = [orders,message];
 const profileButtonsIcon = [icOrder,icMessages];
+
+const paymentMethodsImg = [imgPaypal, imgCod];
+const paymentMethods = [paypal,cod];

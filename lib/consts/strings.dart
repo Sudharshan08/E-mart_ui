@@ -49,3 +49,6 @@ const womenClothing = "Greens",
 
  const termAndCond = "Terms and Conditions";
  const privacyPolicy = "Privacy Policy";
+
+
+ const paypal = "Paypal", cod = "Cash on delivary";
